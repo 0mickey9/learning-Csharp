@@ -25,3 +25,37 @@ Console.WriteLine($"Hello, {name}");
 //  .Format, .IsNullOrEmpty, .IsNullOrWhiteSpace)
 
 
+string? text = Console.ReadLine();
+if (int.TryParse(text, out int number))
+{
+    if (number % 2 == 0)
+    {
+        Console.WriteLine($"The number {number} is even.");
+    }
+    else
+    {
+        Console.WriteLine($"The number {number} is odd.");
+    }
+    Console.WriteLine($"You entered the number: {number}");
+}
+else
+{
+    Console.WriteLine("Invalid input. Please enter an integer.");
+}
+
+
+if (int.TryParse(text, out int daynumber))
+{
+switch (daynumber)
+    {
+        case > 0 and < 6:
+            Console.WriteLine("It's a weekday.");
+            break;
+        case 6 or 7:
+            Console.WriteLine("It's a weekend.");
+            break;
+        default:
+            Console.WriteLine("Invalid day number. Please enter a number between 1 and 7");
+            break;
+    }
+}
