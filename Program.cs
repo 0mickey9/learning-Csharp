@@ -307,14 +307,35 @@ Console.WriteLine($"The count of positive numbers is: {counter}");
 int[] second = (int[])values.Clone(); // if you want to clone the array
 
 values = new int[] { -8, -3, -12, -3};
-int max = values[0];
-int maxi = 0;
-for (int i = 0; i < values.Length; i++)
+static int FindMaxIndex(int[] values)
+{
+    if (values.Length == 0)
+{
+    return -1;
+    }
+    int max = values[0];
+    int maxi = 0;
+    for (int i = 1; i < values.Length; i++)
 {
     if (values[i] > max)
     {
         max = values[i];
         maxi = i;
-    }
+    } 
 }
-Console.WriteLine($"Maximum: {max}, index: {maxi}");
+    return maxi;
+}
+Console.WriteLine($"The index of the maximum value is: {FindMaxIndex(values)}");
+
+
+static void ChangeFirst(int[] numbers)
+{
+    numbers[0] = 100;
+}
+
+static void Main()
+{
+    int[] values = {1,2,3};
+    ChangeFirst(values);
+    Console.WriteLine($"First element after change: {values[0]}");
+}
