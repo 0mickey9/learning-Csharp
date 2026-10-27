@@ -24,6 +24,7 @@ Console.WriteLine($"Hello, {name}");
 //  .Join -- string.Join(", ", new[] { "red", "blue" }) → "red, blue",
 //  .Format, .IsNullOrEmpty, .IsNullOrWhiteSpace)
 Console.Write("do yo want to launch block with reading commands? (1/0): ");
+int n;
 if (Console.ReadLine() == "1")
 {
     Console.Write("Enter a number:");
@@ -91,7 +92,7 @@ if (Console.ReadLine() == "1")
     } while (!int.TryParse(Console.ReadLine(), out userNumber) || userNumber < 1 || userNumber > 10);
 
 
-    int n = int.TryParse(Console.ReadLine(), out int result ) ? result : 0;
+    n = int.TryParse(Console.ReadLine(), out int result ) ? result : 0;
     int sum = 0;
     for (int k = 1; k <= n; k++)
     {
@@ -338,4 +339,158 @@ static void Main()
     int[] values = {1,2,3};
     ChangeFirst(values);
     Console.WriteLine($"First element after change: {values[0]}");
+}
+
+
+int n1;
+do
+{
+    Console.Write("Enter the number of elements in the array (positive integer): ");
+} while (!int.TryParse(Console.ReadLine(), out n1) || n1 <= 0 || n1 > 10);
+numbers = new int[n1];
+for (int index  = 0; index < numbers.Length; index++)
+{
+    Console.Write($"Enter a element for an index {index}: ");
+    while (!int.TryParse(Console.ReadLine(), out numbers[index]))
+    {
+        Console.Write("Invalid integer. Try Again: ");
+    }
+}
+int maxIndex = FindMaxIndex(numbers);
+Console.WriteLine($"Maximum: {numbers[maxIndex]}, index: {maxIndex}");
+
+
+// matrixes 
+
+int[,] matrix =
+{
+    { 1, 2, 3 },
+    { 4, 5, 6 },
+    { 7, 8, 9 }
+};
+Console.WriteLine($"Element at (1,2): {matrix[1, 2]}"); // 6
+// matrix.Length       - 6: загальна кількість елементів
+// matrix.GetLength(0) - 3: кількість рядків
+// matrix.GetLength(1) - 3: кількість стовпців
+
+
+for (int row = 0; row < matrix.GetLength(0); row++)
+{
+    int sum11 = 0;
+    for (int col = 0; col < matrix.GetLength(1); col++)
+    {
+        sum11 += matrix[row, col];
+    }
+    Console.WriteLine($"Row {row} sum: {sum11}; ");
+}
+
+
+//          Debugger
+//   дозволяє бачити, як програма виконується:
+// - Breakpoint — натискаєш ліворуч від номера рядка: програма зупиниться перед його виконанням.
+// - F5 — запуск налагодження.
+// - F10 — виконати наступний рядок, не заходячи всередину викликаного методу.
+// - F11 — зайти всередину методу.
+// - Variables / Watch — перегляд значень змінних.
+
+
+// C#        мова програмування
+// .NET      платформа: виконання та бібліотеки
+// IL        проміжні інструкції після компіляції
+// CLR       середовище виконання .NET
+// JIT       перетворює IL на машинний код під час виконання
+// GC        автоматично звільняє пам’ять недоступних об’єктів
+
+// Властивість	    Що означає
+// Дискретність	    Розв’язання поділено на окремі кроки
+// Визначеність	    Кожна команда має точний, однозначний зміст
+// Скінченність	    Для допустимих вхідних даних алгоритм завершується за скінченну кількість кроків
+// Результативність	Після завершення отримуємо передбачений результат
+// Масовість	    Алгоритм застосовний до класу однотипних задач, а не лише до одного прикладу
+
+// Три базові структури алгоритмів ти вже використовував:
+// - Послідовність — команди виконуються одна за одною.
+// - Розгалуження — обирається гілка через if або switch.
+// - Повторення — команди виконуються циклом.
+
+
+int n11;
+
+while (true)
+{
+    Console.Write("Enter number of grades (1-10): ");
+
+    if (int.TryParse(Console.ReadLine(), out n11) &&
+        n11 >= 1 && n11 <= 10)
+    {
+        break;
+    }
+
+    Console.WriteLine("Invalid input. Try again.");
+}
+
+int[] grades = new int[n11];
+
+for (int i = 0; i < grades.Length; i++)
+{
+    while (true)
+    {
+        Console.Write($"Grade {i + 1} (0-100): ");
+
+        if (int.TryParse(Console.ReadLine(), out grades[i]) &&
+            grades[i] >= 0 && grades[i] <= 100)
+        {
+            break;
+        }
+
+        Console.WriteLine("Invalid input. Try again.");
+    }
+}
+
+int maxIndex11 = FindMaxIndex11(grades);
+
+Console.WriteLine($"Average: {CalculateAverage(grades)}");
+Console.WriteLine($"Maximum: {grades[maxIndex11]}, index: {maxIndex11}");
+Console.WriteLine($"Passed: {CountPassed(grades)}");
+
+static decimal CalculateAverage(int[] grades)
+{
+    int sum = 0;
+
+    for (int i = 0; i < grades.Length; i++)
+    {
+        sum += grades[i];
+    }
+
+    return (decimal)sum / grades.Length;
+}
+
+static int FindMaxIndex11(int[] grades)
+{
+    int maxIndex = 0;
+
+    for (int i = 1; i < grades.Length; i++)
+    {
+        if (grades[i] > grades[maxIndex])
+        {
+            maxIndex = i;
+        }
+    }
+
+    return maxIndex;
+}
+
+static int CountPassed(int[] grades)
+{
+    int count = 0;
+
+    for (int i = 0; i < grades.Length; i++)
+    {
+        if (grades[i] >= 50)
+        {
+            count++;
+        }
+    }
+
+    return count;
 }
